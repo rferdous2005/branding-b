@@ -1,0 +1,27 @@
+version: '3'
+name: d-composes
+services:
+  mysql-db:
+    image: mysql:5.7.16
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: Nopass@!23
+      MYSQL_USER: raiyan
+      MYSQL_PASSWORD: db_raiyan_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+  adminer:
+    container_name: db-adminer
+    image: adminer:4.8.1
+    restart: always
+    ports:
+      - 3305:3305
+volumes:
+  mysql-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/media/raiyan/BNDA/_docker-mysql-vol'
